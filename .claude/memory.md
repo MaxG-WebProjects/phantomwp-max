@@ -16,7 +16,8 @@
 - Prochaine étape : attendre les prochaines demandes de travail (probablement config du menu, des formulaires, ou premier contenu WordPress)
 
 ## Pièges & leçons apprises
-- [2026-09-12] `AGENTS.md` mentionnait Tailwind V4 alors que `CLAUDE.md` impose du CSS vanilla scopé — contradiction entre les instructions destinées à Codex (`AGENTS.md`) et à Claude Code (`CLAUDE.md`). Corrigé dans `AGENTS.md` (commit `d840873`) pour aligner sur CSS vanilla. Vérifier que les skills projet (`.claude/skills/astro-wordpress/SKILL.md`) ne contiennent pas la même incohérence si un problème de style apparaît plus tard.
+- [2026-09-12] `AGENTS.md` mentionnait Tailwind V4 alors que `CLAUDE.md` impose du CSS vanilla scopé — contradiction entre les instructions destinées à Codex (`AGENTS.md`) et à Claude Code (`CLAUDE.md`). Corrigé dans `AGENTS.md` (commit `d840873`) pour aligner sur CSS vanilla.
+- [2026-09-12] Vérification des skills projet (`.claude/skills/astro-wordpress/`) : `SKILL.md` et `tailwind.md` étaient déjà cohérents (CSS vanilla). Résidu trouvé dans `fonts.md` — section "Using Fonts in Tailwind" avec syntaxe `@theme` et classes utilitaires Tailwind. Corrigé (commit `367c521`) pour utiliser `var(--font-*)` en CSS vanilla à la place.
 
 ## Notes diverses
 - Ce fichier est mis à jour uniquement quand l'utilisateur écrit "mem" dans la conversation
