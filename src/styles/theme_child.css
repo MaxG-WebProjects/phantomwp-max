@@ -1,0 +1,21 @@
+/*
+ * THEME CHILD - Your Custom Overrides
+ *
+ * This file is for explicit custom theme overrides that should live outside
+ * Theme Studio. It will NOT be overwritten by Theme Studio.
+ *
+ * Do not put normal Theme Studio token edits here. Theme Studio reads
+ * src/styles/theme.css, not this file.
+ */
+
+/*
+ * Override existing theme tokens or add new ones:
+ *
+ * :root {
+ *   --color-primary: #your-custom-color;
+ *   --color-brand: #ff6b6b;
+ *   --color-highlight: #ffd93d;
+ * }
+ */
+
+/* Add your custom theme overrides below */

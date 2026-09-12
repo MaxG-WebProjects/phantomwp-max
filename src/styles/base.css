@@ -1,0 +1,51 @@
+/* Box sizing and reset */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -moz-text-size-adjust: none; -webkit-text-size-adjust: none; text-size-adjust: none; }
+body { line-height: 1.5; -webkit-font-smoothing: antialiased; }
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; }
+p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+
+/* Body defaults */
+body {
+    font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading, var(--font-sans, system-ui, sans-serif));
+}
+
+code, kbd, samp, pre {
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+}
+
+.site-body {
+    min-height: 100vh;
+    background-color: var(--color-surface);
+    color: var(--color-content);
+    font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+}
+
+/* Container utility */
+.container {
+    width: 100%;
+    max-width: var(--container-7xl, 80rem);
+    margin-inline: auto;
+    padding-inline: clamp(var(--space-md, 1rem), 4vw, var(--space-xl, 2rem));
+}
+
+/* Common utilities that JS or components depend on */
+.hidden { display: none !important; }
+.rotate-180 { transform: rotate(180deg); }
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
