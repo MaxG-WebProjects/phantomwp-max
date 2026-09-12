@@ -57,13 +57,21 @@ Add to BaseLayout.astro <head>:
 }
 ```
 
-## Using Fonts in Tailwind
+## Using Font Tokens in CSS
 Configure in theme.css:
 ```css
-@theme {
+:root {
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-heading: 'Playfair Display', serif;
     --font-mono: 'Fira Code', monospace;
 }
 ```
-Use: class="font-sans", class="font-heading", class="font-mono"
+Use in component styles:
+```css
+.title {
+    font-family: var(--font-heading);
+}
+.code {
+    font-family: var(--font-mono);
+}
+```
