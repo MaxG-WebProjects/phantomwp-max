@@ -6,7 +6,7 @@ This is an Astro static site generated from WordPress content by PhantomWP.
 
 Project skills live in `.claude/skills/<skill-name>/SKILL.md`. These files are committed with the project so Claude Code can discover them natively, and Codex should read the relevant skill before making changes that match its description.
 
-- Read `.claude/skills/astro-wordpress/SKILL.md` before editing Astro pages, components, layouts, WordPress integration, Tailwind styling, fonts, icons, SEO, or navigation.
+- Read `.claude/skills/astro-wordpress/SKILL.md` before editing Astro pages, components, layouts, WordPress integration, CSS styling, fonts, icons, SEO, or navigation.
 - Read `.claude/skills/woocommerce-storefront/SKILL.md` before editing WooCommerce products, cart, checkout, orders, customer accounts, payments, taxes, shipping, or PhantomWP Connect Woo bridge code.
 - Read `.claude/skills/agent-efficiency/SKILL.md` before planning or executing multi-step edits. It keeps exploration batched, decisions crisp, and verification explicit.
 - Read `.claude/skills/phantomwp-tools/SKILL.md` when running inside PhantomWP chat or when a task mentions PhantomWP-only tools such as schema probes, preview screenshots, or IDE navigation.
@@ -23,6 +23,6 @@ Project skills live in `.claude/skills/<skill-name>/SKILL.md`. These files are c
 ## Core Rules
 
 - This is Astro, not React. Use `class=`, frontmatter between `---` markers, and no React hooks in `.astro` files.
-- Tailwind V4 only. Prefer theme tokens such as `bg-surface`, `text-content`, and `bg-primary`.
+- Vanilla scoped CSS only, no Tailwind. Use component-local `<style>` blocks and theme tokens such as `var(--color-primary)`, `var(--color-surface)` from `src/styles/theme.css`.
 - Do not edit generated files unless the user explicitly asks. Use `src/lib/functions.ts`, menu slots, and new components as extension points.
 - Astro HMR handles `.astro`, `.css`, and `.ts` changes. Restart only after package installs or config changes.
