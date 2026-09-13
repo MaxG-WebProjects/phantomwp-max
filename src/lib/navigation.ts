@@ -63,7 +63,9 @@ async function loadMenuConfig(): Promise<MenuConfig | null> {
     const config = await import('../config/menus.json');
     if (config.default && config.default.menus && config.default.menus.length > 0) {
       // Convert new format to MenuConfig format - use first menu as default
-      const firstMenu = config.default.menus[0];
+      const firstMenu = config.default.menus[0] as typeof config.default.menus[0] & {
+        pageOrders?: Record<string, number>;
+      };
       const globalExcludedPages = Array.isArray(config.default.excludedPages) ? config.default.excludedPages : [];
       const menuExcludedPages = Array.isArray(firstMenu.excludedPages) ? firstMenu.excludedPages : [];
       menuConfig = {

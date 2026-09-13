@@ -6,11 +6,11 @@
  * Edit this menu via the Menu Builder in the IDE,
  * or customize it directly here.
  */
-import { getNavigationPages, isActivePath } from '../../lib/navigation';
+import { getNavigationPages, isActivePath, type MenuItem } from '../../lib/navigation';
 
 const currentPath = Astro.url.pathname;
 const discoveredPages = await getNavigationPages();
-const menuItems = [
+const menuItems: MenuItem[] = [
     { id: 'home', type: 'home', label: 'Home', url: '/' },
     ...discoveredPages.map(page => ({
         id: 'page_' + page.slug,
