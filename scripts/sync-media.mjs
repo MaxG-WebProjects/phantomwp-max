@@ -30,29 +30,29 @@ const SYNC_MANIFEST_PATH = path.join(ROOT, 'src/lib/.sync-manifest.json');
 // Responsive breakpoints for content images (widths in px)
 const RESPONSIVE_WIDTHS = [320, 640, 960, 1200];
 
-// Read WordPress URL and access secret from the wordpress.ts file
+// Read WordPress URL and access secret from the wordpress-config.ts file
 function getWordPressConfig() {
-  const wpFilePath = path.join(ROOT, 'src/lib/wordpress.ts');
-  
+  const wpFilePath = path.join(ROOT, 'src/lib/wordpress-config.ts');
+
   if (!fs.existsSync(wpFilePath)) {
-    console.log('[sync-media] No WordPress client found, skipping...');
+    console.log('[sync-media] No WordPress config found, skipping...');
     return null;
   }
-  
+
   const content = fs.readFileSync(wpFilePath, 'utf-8');
   const urlMatch = content.match(/(?:WORDPRESS_API_URL|WP_API_URL)\s*=\s*['"]([^'"]+)['"]/);
-  
+
   if (!urlMatch) {
     console.log('[sync-media] Could not parse WordPress URL, skipping...');
     return null;
   }
-  
+
   // Extract the baked-in access secret (fallback value after ||)
   const secretMatch = content.match(/WP_ACCESS_SECRET\s*=.*\|\|\s*'([^']*)'/);
   const accessSecret = secretMatch ? secretMatch[1] : '';
-  
-  // Extract image source mode
-  const imageSourceMatch = content.match(/IMAGE_SOURCE_MODE[^']*'(local|cdn)'/);
+
+  // Extract image source mode (require it to be the assigned value, not the type annotation)
+  const imageSourceMatch = content.match(/IMAGE_SOURCE_MODE[^=]*=\s*'(local|cdn)'/);
   const imageSource = imageSourceMatch ? imageSourceMatch[1] : 'local';
   
   return {
