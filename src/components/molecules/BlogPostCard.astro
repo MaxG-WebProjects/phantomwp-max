@@ -1,0 +1,165 @@
+---
+import type { WordPressPost } from '@/types/wordpress';
+import PostMeta from '@/components/atoms/PostMeta.astro';
+
+interface Props {
+  post: WordPressPost;
+}
+
+const { post } = Astro.props;
+
+const featuredImage = post._embedded?.['wp:featuredmedia']?.[0];
+const author = post._embedded?.author?.[0];
+const categories = post._embedded?.['wp:term']?.[0]?.filter(
+  (term) => term.taxonomy === 'category'
+);
+const firstCategory = categories?.[0]?.name;
+---
+
+<article class="blog-post-card">
+  {
+    featuredImage && (
+      <a href={`/blog/${post.slug}`} class="featured-image-link">
+        <img
+          src={featuredImage.source_url}
+          alt={featuredImage.alt_text || post.title.rendered}
+          class="featured-image"
+          loading="lazy"
+        />
+      </a>
+    )
+  }
+
+  <div class="card-content">
+    <div class="card-header">
+      <h3 class="post-title">
+        <a href={`/blog/${post.slug}`}>{post.title.rendered}</a>
+      </h3>
+      <PostMeta
+        date={post.date}
+        author={author?.name}
+        category={firstCategory}
+      />
+    </div>
+
+    <div class="post-excerpt" set:html={post.excerpt.rendered} />
+
+    <a href={`/blog/${post.slug}`} class="read-more">
+      Lire la suite <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .blog-post-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .blog-post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .featured-image-link {
+    display: block;
+    overflow: hidden;
+    background: var(--color-surface-secondary);
+    aspect-ratio: 16 / 9;
+  }
+
+  .featured-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-image-link:hover .featured-image {
+    transform: scale(1.05);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    flex: 1;
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .post-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .post-title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .post-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-excerpt {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .post-excerpt :global(p) {
+    margin: 0;
+  }
+
+  .read-more {
+    align-self: flex-start;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    transition: color 0.2s ease;
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .read-more:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .blog-post-card {
+      background: var(--color-surface-dark);
+      border-color: var(--color-border-dark);
+    }
+
+    .post-title a:hover {
+      color: var(--color-primary-light);
+    }
+
+    .read-more {
+      color: var(--color-primary-light);
+    }
+
+    .read-more:hover {
+      color: var(--color-primary-lighter);
+    }
+  }
+</style>

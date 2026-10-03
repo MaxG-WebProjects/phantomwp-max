@@ -1,0 +1,56 @@
+---
+interface Props {
+  date: string;
+  author?: string;
+  category?: string;
+}
+
+const { date, author, category } = Astro.props;
+
+const publishDate = new Date(date).toLocaleDateString('fr-FR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<div class="post-meta">
+  {category && <span class="meta-item category">{category}</span>}
+  <time datetime={date} class="meta-item date">{publishDate}</time>
+  {author && <span class="meta-item author">Par {author}</span>}
+</div>
+
+<style>
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .meta-item.category {
+    background: var(--color-primary-subtle);
+    color: var(--color-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+  }
+
+  .meta-item.date,
+  .meta-item.author {
+    font-style: italic;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .meta-item.category {
+      background: var(--color-primary-dark-subtle);
+      color: var(--color-primary-light);
+    }
+  }
+</style>
